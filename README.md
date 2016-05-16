@@ -1,2 +1,5 @@
 # cf-summit-training
-All necessary stuff for the CF Summit 2016 training session
+
+## Files
+
+cf-summit-cloudformation-template.json - AWS CloudFormation script to create necessary infrastructure
