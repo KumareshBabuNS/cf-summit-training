@@ -40,7 +40,8 @@
 ### Pushing your First App
 
 * Says: "Now push the included sample app: **TO DO**"
-  * Who is to provide the sample app?
+  * Who is to provide the sample app? **Solved**
+  * Training app: `git clone https://github.com/Altoros/cf-example-sinatra`
 
 ## 4. Data services & the marketplace - [Labs](https://content.staging.enablement.pivotal.io/public/cf-oss-training/operator/site/labs/services)
 
