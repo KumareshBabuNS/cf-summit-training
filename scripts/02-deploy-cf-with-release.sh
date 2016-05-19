@@ -6,17 +6,18 @@ source variables.sh
 
 echo Bosh director lives on: $BOSH_DIRECTOR_IP
 echo Cloud Foundry release is $CF_RELEASE
+echo Cloud Foundry manifest is $CF_MANIFEST
+
+git clone -q https://github.com/cloudfoundry/cf-release.git $CF_RELEASE_DIR
+cd $CF_RELEASE_DIR
+echo Updating CF release
+./scripts/update &>/dev/null
 
 echo Targeting Bosh Lite
 bosh target $BOSH_DIRECTOR_IP lite
 
 echo Uploading stemcell
 bosh -q -n upload stemcell --skip-if-exists $BOSH_LITE_STEMCELL
-
-git clone -q https://github.com/cloudfoundry/cf-release.git
-cd cf-release
-echo Updating CF release
-./scripts/update &>/dev/null
 
 echo Uploading release
 bosh -n upload release $CF_RELEASE
