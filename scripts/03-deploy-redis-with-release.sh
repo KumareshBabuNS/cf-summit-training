@@ -18,7 +18,7 @@ git clone -q https://github.com/pivotal-cf/cf-redis-release.git $CF_REDIS_RELEAS
 cd $CF_REDIS_RELEASE_DIR
 
 echo Uploading release
-bosh -n upload release $CF_REDIS_RELEASE_DIR/releases/$CF_REDIS_RELEASE
+bosh -n upload release $CF_REDIS_RELEASE_DIR/releases/cf-redis/$CF_REDIS_RELEASE
 
 sed -i -- "s/director_uuid: REPLACE_ME/director_uuid: $BOSH_UUID/g" $CF_REDIS_MANIFEST
 sed -i -- "s/bosh-lite.com/$CF_DOMAIN/g" $CF_REDIS_MANIFEST
