@@ -13,7 +13,7 @@
       "Default": "m3.xlarge",
       "AllowedValues": [
         "m3.xlarge",
-        "m4.xlarge"
+        "m3.2xlarge"
       ],
       "ConstraintDescription": "must be a valid EC2 instance type."
     },
@@ -32,7 +32,7 @@
       "m3.xlarge": {
         "Arch": "PV64"
       },
-      "m4.xlarge": {
+      "m3.2xlarge": {
         "Arch": "PV64"
       }
     },
@@ -77,11 +77,29 @@
           },
           {
             "IpProtocol": "tcp",
+            "FromPort": "443",
+            "ToPort": "443",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
             "FromPort": "22",
             "ToPort": "22",
             "CidrIp": {
               "Ref": "SSHLocation"
             }
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "4443",
+            "ToPort": "4443",
+            "CidrIp": "0.0.0.0/0"
+          },
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "80",
+            "ToPort": "80",
+            "CidrIp": "0.0.0.0/0"
           },
           {
             "IpProtocol": "tcp",
@@ -112,13 +130,27 @@
       "Metadata": {
         "AWS::CloudFormation::Designer": {
           "id": "1437be42-c10e-47af-a0b9-3c7bf6276c6c"
+        },
+        "AWS::CloudFormation::Init" : {
+          "config" : {
+            "commands" : {
+              "command" : "iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j DNAT --to-destination 10.244.0.34",
+              "command" : "iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination 10.244.0.34",
+              "command" : "iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 2222 -j DNAT --to-destination 10.244.0.34",
+              "command" : "iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 4443 -j DNAT --to-destination 10.244.0.34"
+            }
+          }
         }
       },
       "Properties": {
         "BlockDeviceMappings" : [
            {
               "DeviceName" : "/dev/sda1",
-              "Ebs" : { "VolumeSize" : "50" }
+              "Ebs":{
+                "VolumeSize":"80",
+                "VolumeType":"gp2",
+                "DeleteOnTermination":"true"
+              }
            }
         ],
         "ImageId": {
