@@ -4,7 +4,7 @@ compilation:
   network: cf1
   reuse_compilation_vms: true
   workers: 6
-director_uuid: 190bb19e-2e13-4f69-99ec-316a5ac637cf
+director_uuid: REPLACE_ME
 jobs:
 - default_networks:
   - name: cf1
@@ -236,7 +236,7 @@ jobs:
         tags:
           component: blobstore
         uris:
-        - blobstore.54.175.16.44.xip.io
+        - blobstore.bosh-lite.com
   resource_pool: medium_z1
   templates:
   - name: consul_agent
@@ -271,7 +271,7 @@ jobs:
         tags:
           component: blobstore
         uris:
-        - blobstore.54.175.16.44.xip.io
+        - blobstore.bosh-lite.com
   resource_pool: medium_z1
   templates:
   - name: consul_agent
@@ -322,10 +322,10 @@ jobs:
         tags:
           component: uaa
         uris:
-        - uaa.54.175.16.44.xip.io
-        - '*.uaa.54.175.16.44.xip.io'
-        - login.54.175.16.44.xip.io
-        - '*.login.54.175.16.44.xip.io'
+        - uaa.bosh-lite.com
+        - '*.uaa.bosh-lite.com'
+        - login.bosh-lite.com
+        - '*.login.bosh-lite.com'
     uaa:
       proxy:
         servers:
@@ -365,10 +365,10 @@ jobs:
         tags:
           component: uaa
         uris:
-        - uaa.54.175.16.44.xip.io
-        - '*.uaa.54.175.16.44.xip.io'
-        - login.54.175.16.44.xip.io
-        - '*.login.54.175.16.44.xip.io'
+        - uaa.bosh-lite.com
+        - '*.uaa.bosh-lite.com'
+        - login.bosh-lite.com
+        - '*.login.bosh-lite.com'
     uaa:
       proxy:
         servers:
@@ -412,7 +412,7 @@ jobs:
         tags:
           component: CloudController
         uris:
-        - api.54.175.16.44.xip.io
+        - api.bosh-lite.com
   resource_pool: large_z1
   templates:
   - name: consul_agent
@@ -474,7 +474,7 @@ jobs:
         tags:
           component: CloudController
         uris:
-        - api.54.175.16.44.xip.io
+        - api.bosh-lite.com
   resource_pool: large_z2
   templates:
   - name: consul_agent
@@ -586,7 +586,7 @@ jobs:
         tags:
           component: HM9K
         uris:
-        - hm9000.54.175.16.44.xip.io
+        - hm9000.bosh-lite.com
   resource_pool: medium_z1
   templates:
   - name: consul_agent
@@ -617,7 +617,7 @@ jobs:
         tags:
           component: HM9K
         uris:
-        - hm9000.54.175.16.44.xip.io
+        - hm9000.bosh-lite.com
   resource_pool: medium_z2
   templates:
   - name: consul_agent
@@ -777,12 +777,12 @@ jobs:
         port: 8081
         registration_interval: 20s
         uris:
-        - doppler.54.175.16.44.xip.io
+        - doppler.bosh-lite.com
       - name: loggregator
         port: 8080
         registration_interval: 20s
         uris:
-        - loggregator.54.175.16.44.xip.io
+        - loggregator.bosh-lite.com
     traffic_controller:
       zone: z1
   resource_pool: small_z1
@@ -807,12 +807,12 @@ jobs:
         port: 8081
         registration_interval: 20s
         uris:
-        - doppler.54.175.16.44.xip.io
+        - doppler.bosh-lite.com
       - name: loggregator
         port: 8080
         registration_interval: 20s
         uris:
-        - loggregator.54.175.16.44.xip.io
+        - loggregator.bosh-lite.com
     traffic_controller:
       zone: z2
   resource_pool: small_z2
@@ -2570,13 +2570,13 @@ properties:
   acceptance_tests:
     admin_password: admin
     admin_user: admin
-    api: api.54.175.16.44.xip.io
-    apps_domain: 54.175.16.44.xip.io
+    api: api.bosh-lite.com
+    apps_domain: bosh-lite.com
     nodes: 1
     skip_ssl_validation: true
     use_http: true
   app_domains:
-  - 54.175.16.44.xip.io
+  - bosh-lite.com
   app_ssh:
     host_key_fingerprint: a6:d1:08:0b:b0:cb:9b:5f:c4:ba:44:2a:97:26:19:8a
     oauth_client_id: ssh-proxy
@@ -2675,7 +2675,7 @@ properties:
     broker_client_timeout_seconds: 70
     buildpacks:
       blobstore_type: webdav
-      buildpack_directory_key: 54.175.16.44.xip.io-cc-buildpacks
+      buildpack_directory_key: bosh-lite.com-cc-buildpacks
       cdn: null
       fog_connection: null
       webdav_config:
@@ -2704,7 +2704,7 @@ properties:
           -----END CERTIFICATE-----
         password: blobstore-password
         private_endpoint: https://blobstore.service.cf.internal
-        public_endpoint: http://blobstore.54.175.16.44.xip.io
+        public_endpoint: http://blobstore.bosh-lite.com
         username: blobstore-username
     bulk_api_password: bulk-password
     client_max_body_size: 15M
@@ -2748,7 +2748,7 @@ properties:
     droplets:
       blobstore_type: webdav
       cdn: null
-      droplet_directory_key: 54.175.16.44.xip.io-cc-droplets
+      droplet_directory_key: bosh-lite.com-cc-droplets
       fog_connection: null
       max_staged_droplets_stored: null
       webdav_config:
@@ -2777,7 +2777,7 @@ properties:
           -----END CERTIFICATE-----
         password: blobstore-password
         private_endpoint: https://blobstore.service.cf.internal
-        public_endpoint: http://blobstore.54.175.16.44.xip.io
+        public_endpoint: http://blobstore.bosh-lite.com
         username: blobstore-username
     external_host: api
     external_port: 9022
@@ -2835,7 +2835,7 @@ properties:
         enabled: true
         record_sql: obfuscated
     packages:
-      app_package_directory_key: 54.175.16.44.xip.io-cc-packages
+      app_package_directory_key: bosh-lite.com-cc-packages
       blobstore_type: webdav
       cdn: null
       fog_connection: null
@@ -2867,7 +2867,7 @@ properties:
           -----END CERTIFICATE-----
         password: blobstore-password
         private_endpoint: https://blobstore.service.cf.internal
-        public_endpoint: http://blobstore.54.175.16.44.xip.io
+        public_endpoint: http://blobstore.bosh-lite.com
         username: blobstore-username
     quota_definitions:
       default:
@@ -2881,7 +2881,7 @@ properties:
       blobstore_type: webdav
       cdn: null
       fog_connection: null
-      resource_directory_key: 54.175.16.44.xip.io-cc-resources
+      resource_directory_key: bosh-lite.com-cc-resources
       webdav_config:
         ca_cert: |+
           -----BEGIN CERTIFICATE-----
@@ -2908,7 +2908,7 @@ properties:
           -----END CERTIFICATE-----
         password: blobstore-password
         private_endpoint: https://blobstore.service.cf.internal
-        public_endpoint: http://blobstore.54.175.16.44.xip.io
+        public_endpoint: http://blobstore.bosh-lite.com
         username: blobstore-username
     security_event_logging:
       enabled: null
@@ -2949,7 +2949,7 @@ properties:
         protocol: all
     service_usage_events:
       cutoff_age_in_days: 31
-    srv_api_uri: https://api.54.175.16.44.xip.io
+    srv_api_uri: https://api.bosh-lite.com
     stacks: null
     staging_upload_password: upload-password
     staging_upload_user: upload-user
@@ -3009,7 +3009,7 @@ properties:
         -----END CERTIFICATE-----
       password: blobstore-password
       private_endpoint: https://blobstore.service.cf.internal
-      public_endpoint: http://blobstore.54.175.16.44.xip.io
+      public_endpoint: http://blobstore.bosh-lite.com
       username: blobstore-username
   ccdb:
     address: 10.244.0.30
@@ -3357,7 +3357,7 @@ properties:
     staging_memory_limit_mb: 1024
   description: null
   disk_quota_enabled: false
-  domain: 54.175.16.44.xip.io
+  domain: bosh-lite.com
   doppler:
     blacklisted_syslog_ranges: null
     debug: false
@@ -3530,7 +3530,7 @@ properties:
       VTDb5Nww17xH4sFAdZjrCacRqc2lq4f0Xj6gxXoKAYCp3RNzvhX3TMKxP+UWXnsp
       Xyxn1ZhhcHZtOShQ8v6/MpYakL2Zg0uGOUlMrTln3sD011Nr3hMFsQ==
       -----END RSA PRIVATE KEY-----
-    url: https://hm9000.54.175.16.44.xip.io
+    url: https://hm9000.bosh-lite.com
   logger_endpoint: null
   loggregator:
     blacklisted_syslog_ranges: null
@@ -3554,8 +3554,8 @@ properties:
     enabled: true
     invitations_enabled: null
     links:
-      passwd: https://console.54.175.16.44.xip.io/password_resets/new
-      signup: https://console.54.175.16.44.xip.io/register
+      passwd: https://console.bosh-lite.com/password_resets/new
+      signup: https://console.bosh-lite.com/register
     logout: null
     messages: null
     notifications:
@@ -3627,8 +3627,8 @@ properties:
   routing_api:
     enabled: null
   smoke_tests:
-    api: api.54.175.16.44.xip.io
-    apps_domain: 54.175.16.44.xip.io
+    api: api.bosh-lite.com
+    apps_domain: bosh-lite.com
     ginkgo_opts: null
     org: SMOKE_TEST_ORG
     password: admin
@@ -3639,7 +3639,7 @@ properties:
     skip_cert_verify: true
   support_address: http://support.cloudfoundry.com
   syslog_daemon_config: null
-  system_domain: 54.175.16.44.xip.io
+  system_domain: bosh-lite.com
   system_domain_organization: null
   traffic_controller:
     disable_access_control: null
@@ -3692,7 +3692,7 @@ properties:
         authorized-grant-types: authorization_code,client_credentials,refresh_token
         autoapprove: true
         override: true
-        redirect-uri: https://login.54.175.16.44.xip.io
+        redirect-uri: https://login.bosh-lite.com
         scope: openid,oauth.approvals
         secret: login-secret
       notifications:
@@ -3715,7 +3715,7 @@ properties:
         authorized-grant-types: client_credentials,refresh_token
         secret: tcp-router-secret
     database: null
-    issuer: https://uaa.54.175.16.44.xip.io
+    issuer: https://uaa.bosh-lite.com
     jwt:
       signing_key: |+
         -----BEGIN RSA PRIVATE KEY-----
@@ -3810,7 +3810,7 @@ properties:
       HzneT3ZbOcsEIvK14FecXzV7OqRvOePXSJ2cS8lNqd1k2pxCjliYW4pfQm7e58ma
       /6wtWeX8QMBcZ6ufxs0VgxPv4P8jczrzqxgszLUK8hdnZEL7+xk=
       -----END RSA PRIVATE KEY-----
-    url: https://uaa.54.175.16.44.xip.io
+    url: https://uaa.bosh-lite.com
     user: null
     zones:
       internal:
@@ -3958,4 +3958,3 @@ update:
   max_in_flight: 50
   serial: false
   update_watch_time: 1000-180000
-
