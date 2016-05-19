@@ -5,8 +5,7 @@ set -e
 source variables.sh
 
 echo Bosh director lives on: $BOSH_DIRECTOR_IP
-echo CF_RELEASE is at $CF_RELEASE_DIR
-echo CF_LAST_RELEASE is $CF_LAST_RELEASE
+echo Cloud Foundry release is $CF_RELEASE
 
 echo Targeting Bosh Lite
 bosh target $BOSH_DIRECTOR_IP lite
@@ -14,9 +13,16 @@ bosh target $BOSH_DIRECTOR_IP lite
 echo Uploading stemcell
 bosh -q -n upload stemcell --skip-if-exists $BOSH_LITE_STEMCELL
 
-echo Creating release
-bosh create release --name cf
+cd $RESOURCES
+
 echo Uploading release
-bosh -n upload release
+bosh -n upload release $CF_RELEASE
+
+sed -i -- "s/director_uuid: REPLACE_ME/director_uuid: $BOSH_UUID/g" $CF_MANIFEST
+sed -i -- "s/bosh-lite.com/$CF_DOMAIN/g" $CF_MANIFEST
+
+echo Set deployment
+bosh -n deployment $CF_MANIFEST
+
 echo Deploying!
 bosh -n deploy

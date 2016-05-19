@@ -1,13 +1,14 @@
 #!/bin/bash -e
 
-UUID=$(bosh status | grep UUID | awk -F'UUID' '{print $2}' | xargs)
-DOMAIN=$(wget http://ipinfo.io/ip -qO -).xip.io
+source variables.sh
+
+cd $WORKSPACE
 
 git clone https://github.com/pivotal-cf/cf-redis-release.git
 cd cf-redis-release
 
-sed -i -- "s/director_uuid: REPLACE_ME/director_uuid: $UUID/g" templates/sample_stubs/meta-warden.yml
-sed -i -- "s/bosh-lite.com/$DOMAIN/g" templates/sample_stubs/meta-warden.yml
+sed -i -- "s/director_uuid: REPLACE_ME/director_uuid: $BOSH_UUID/g" templates/sample_stubs/meta-warden.yml
+sed -i -- "s/bosh-lite.com/$CF_DOMAIN/g" templates/sample_stubs/meta-warden.yml
 
 ./scripts/generate-deployment-manifest warden > cf-redis.yml
 

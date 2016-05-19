@@ -1,18 +1,30 @@
 #!/bin/bash -e
 
-UUID=$(bosh status | grep UUID | awk -F'UUID' '{print $2}' | xargs)
-DOMAIN=$(wget http://ipinfo.io/ip -qO -).xip.io
+set -e
 
-git clone https://github.com/pivotal-cf/cf-redis-release.git
-cd cf-redis-release
+source variables.sh
 
-sed -i -- "s/director_uuid: REPLACE_ME/director_uuid: $UUID/g" templates/sample_stubs/meta-warden.yml
-sed -i -- "s/bosh-lite.com/$DOMAIN/g" templates/sample_stubs/meta-warden.yml
+echo Bosh director lives on: $BOSH_DIRECTOR_IP
+echo Redis release is $CF_REDIS_RELEASE
 
-./scripts/generate-deployment-manifest warden > cf-redis.yml
+echo Targeting Bosh Lite
+bosh target $BOSH_DIRECTOR_IP lite
 
-bosh upload release releases/cf-redis/cf-redis-424.yml
-bosh deployment cf-redis.yml
+echo Uploading stemcell
+bosh -q -n upload stemcell --skip-if-exists $BOSH_LITE_STEMCELL
+
+cd $RESOURCES
+
+echo Uploading release
+bosh -n upload release $CF_REDIS_RELEASE
+
+sed -i -- "s/director_uuid: REPLACE_ME/director_uuid: $BOSH_UUID/g" $CF_REDIS_MANIFEST
+sed -i -- "s/bosh-lite.com/$CF_DOMAIN/g" $CF_REDIS_MANIFEST
+
+echo Set deployment
+bosh -n deployment $CF_REDIS_MANIFEST
+
+echo Deploying!
 bosh -n deploy
 
 # Register broker

@@ -2,18 +2,14 @@
 
 set -e
 
-export DIRECTOR_IP=$(wget http://ipinfo.io/ip -qO -)
-export BOSH_USER=admin
-export BOSH_PASSWORD=admin
-BOSH_LITE_STEMCELL="https://s3.amazonaws.com/bosh-warden-stemcells/bosh-stemcell-3126-warden-boshlite-ubuntu-trusty-go_agent.tgz"
-WORKSPACE=$HOME/workspace
-CF_RELEASE=$WORKSPACE/cf-release
+source variables.sh
+
 AWS_MANIFEST_STUB=$WORKSPACE/aws_manifest_stub.yml
 
-echo Bosh director lives on: $DIRECTOR_IP
+echo Bosh director lives on: $BOSH_DIRECTOR_IP
 echo CF_RELEASE is at $CF_RELEASE
 
-cd $HOME
+cd $WORKSPACE
 
 echo Installing RVM
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
@@ -30,20 +26,16 @@ unzip -q -o spiff_linux_amd64.zip
 sudo mv spiff /usr/bin/
 rm spiff_linux_amd64.zip
 
-mkdir -p $WORKSPACE
-
-cd $WORKSPACE
-
-echo Creating stub manifest for system domain $DIRECTOR_IP.xip.io
+echo Creating stub manifest for system domain $BOSH_DIRECTOR_IP.xip.io
 
 cat > $AWS_MANIFEST_STUB <<EOL
 ---
 properties:
-  domain: $DIRECTOR_IP.xip.io
+  domain: $BOSH_DIRECTOR_IP.xip.io
 EOL
 
 echo Targeting Bosh Lite
-bosh target $DIRECTOR_IP lite
+bosh target $BOSH_DIRECTOR_IP lite
 
 echo Uploading stemcell
 bosh -q -n upload stemcell --skip-if-exists $BOSH_LITE_STEMCELL
@@ -51,7 +43,7 @@ bosh -q -n upload stemcell --skip-if-exists $BOSH_LITE_STEMCELL
 echo Cloning CloudFoundry from GitHub...
 git clone -q https://github.com/cloudfoundry/cf-release.git
 
-cd $CF_RELEASE
+cd cf-release
 
 echo Updating CF release
 ./scripts/update &>/dev/null

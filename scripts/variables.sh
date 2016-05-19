@@ -12,10 +12,9 @@ bosh target $BOSH_DIRECTOR_IP lite
 
 export BOSH_UUID=$(bosh status | grep UUID | awk -F'UUID' '{print $2}' | xargs)
 
-export CF_RELEASE_DIR=$WORKSPACE/cf-release
-export CF_LAST_RELEASE="releases/cf-237.yml"
 export CF_DOMAIN=$(wget http://ipinfo.io/ip -qO -).xip.io
+export CF_RELEASE="releases/cf-237.yml"
+export CF_MANIFEST="manifests/cf.yml"
 
-mkdir -p $WORKSPACE
-
-cd $WORKSPACE
+export CF_REDIS_RELEASE="releases/cf-redis-424.yml"
+export CF_REDIS_MANIFEST="manifests/cf-redis.yml"
