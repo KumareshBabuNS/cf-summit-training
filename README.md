@@ -15,7 +15,9 @@
 2. Get the following file:
   * `wget https://raw.githubusercontent.com/eljuanchosf/cf-summit-training/master/scripts/00-prepare-environment.sh`
   * `wget https://raw.githubusercontent.com/eljuanchosf/cf-summit-training/master/scripts/01-route-requests.sh`
-3. Run those files
+3. Run those files:
+  * `source 00-prepare-environment.sh`
+  * `./01-route-requests.sh`
 4. You are ready!
 
 ## Stemcells
