@@ -2,6 +2,7 @@
 
 cat > define-workspace.sh <<EOL
 export WORKSPACE=$HOME/workspace
+export RESOURCES=$WORKSPACE/cf-summit-training
 EOL
 
 source define-workspace.sh
