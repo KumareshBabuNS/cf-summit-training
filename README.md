@@ -29,7 +29,7 @@
 
 ### WARNING
 
-Since the purpose of this training is to learn how to get around the BOSH and Cloud Foundry ecosystem, please ***do not use*** the "**`deploy`**" scripts provided below unless you are **seriously stuck**  in some step. The `-full` versions of the scripts are for learning purposes after this training.
+Since the purpose of this training is to learn how to get around the BOSH and Cloud Foundry ecosystem, please ***do not use*** the "**`deploy`**" scripts provided below unless you are **seriously stuck**  in some step. The `-full` versions of the scripts are for learning purposes after this training, and the decryption password will be provided by your instructors at the closing.
 
 1. [Prepare the environment](scripts/00-prepare-environment.sh)
 1. [Route requests internally](scripts/01-route-requests.sh)
