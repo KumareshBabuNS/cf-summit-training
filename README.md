@@ -34,7 +34,7 @@ Since the purpose of this training is to learn how to get around the BOSH and Cl
 1. [Prepare the environment](scripts/00-prepare-environment.sh)
 1. [Route requests internally](scripts/01-route-requests.sh)
 1. [General variables](scripts/variables.sh.gpg) - Use `source variables.sh`.
-1. [Deploy CF - With release](scripts/03-deploy-cf-with-release.sh.gpg)
-1. [Deploy CF - Full](scripts/03-deploy-cf-full.sh.gpg)
-1. [Deploy Redis - With release](scripts/04-deploy-redis-with-release.sh.gpg)
-1. [Deploy Redis - Full](scripts/04-deploy-redis-full.sh.gpg)
+1. [Deploy CF - With release](scripts/02-deploy-cf-with-release.sh.gpg)
+1. [Deploy CF - Full](scripts/02-deploy-cf-full.sh.gpg)
+1. [Deploy Redis - With release](scripts/03-deploy-redis-with-release.sh.gpg)
+1. [Deploy Redis - Full](scripts/03-deploy-redis-full.sh.gpg)
